@@ -1,0 +1,12 @@
+{
+  "name": "1.-ripasso",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "author": "",
+  "type": "module",
+  "license": "ISC",
+  "description": ""
+}
