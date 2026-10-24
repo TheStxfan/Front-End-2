@@ -8,6 +8,7 @@ import {
 import type {
   Result,
   TypeCart,
+  TypeCartProduct,
   TypeProductWithId,
   TypeProductWithoutId,
   TypeUser,
@@ -27,14 +28,14 @@ const users: TypeUser[] = await getAllUsers();
 
 // Product By Id
 
-// const productById: Result<TypeProductWithId> = getProductById(20, products);
-// console.log(
-//   productById.success === true ? productById.data : productById.error,
-// );
+const productById: Result<TypeProductWithId> = getProductById(20, products);
+console.log(
+  productById.success === true ? productById.data : productById.error,
+);
 
 // Cart Price By Id
 
-const cartPriceById: Result<number> = getCartPriceById(10, carts, products);
+const cartPriceById: Result<string> = getCartPriceById(5, carts, products);
 console.log(
   cartPriceById.success === true ? cartPriceById.data : cartPriceById.error,
 );

@@ -3,7 +3,7 @@ export type Result<T> =
   | { success: false; error: string };
 
 export type TypeProductWithoutId = {
-  title: "string";
+  title: string;
   price: number;
   description: string;
   category: string;

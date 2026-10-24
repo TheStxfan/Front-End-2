@@ -73,7 +73,7 @@ export const getCartPriceById = (
   id: number,
   carts: TypeCart[],
   catalogo: TypeProductWithId[],
-): Result<number> => {
+): Result<string> => {
   let totalCartPrice: number = 0;
 
   const cart: TypeCart = carts[id - 1];
@@ -99,5 +99,8 @@ export const getCartPriceById = (
     }
   }
 
-  return { success: true, data: totalCartPrice };
+  return {
+    success: true,
+    data: `Carrello ${id} (utente ${cart.userId}): ${totalCartPrice} €`,
+  };
 };
