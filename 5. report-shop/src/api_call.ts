@@ -1,4 +1,5 @@
 import type {
+  Result,
   TypeCart,
   TypeCartProduct,
   TypeProductWithId,
@@ -54,11 +55,23 @@ export const getAllUsers = async (): Promise<TypeUser[]> => {
 export const getProductById = (
   id: number,
   catalogo: TypeProductWithId[],
-): TypeProductWithId | TypeError => {
+): Result<TypeProductWithId> => {
   let prodotto: TypeProductWithId = catalogo[id - 1];
-  if (prodotto != undefined) {
-    return prodotto;
+  if (prodotto) {
+    return {
+      success: true,
+      data: prodotto,
+    };
   } else {
-    return Error(`Error: A product with id ${id} does not exist.`);
+    return {
+      success: false,
+      error: `Error: A product with id ${id} does not exist.`,
+    };
   }
 };
+
+// export const getCartPriceById = (
+//   id: number,
+//   carts: TypeCart[],
+//   catalogo: TypeProductWithId[],
+// ): number => {};

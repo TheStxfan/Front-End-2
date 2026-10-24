@@ -1,3 +1,7 @@
+export type Result<T> =
+  | { success: true; data: T }
+  | { success: false; error: string };
+
 export type TypeProductWithoutId = {
   title: "string";
   price: number;
