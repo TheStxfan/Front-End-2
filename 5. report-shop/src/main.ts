@@ -1,41 +1,4 @@
-import {
-  getAllProducts,
-  getAllCarts,
-  getAllUsers,
-  getProductById,
-  getCartPriceById,
-} from "./api_call.js";
-import type {
-  Result,
-  TypeCart,
-  TypeCartProduct,
-  TypeProductWithId,
-  TypeProductWithoutId,
-  TypeUser,
-} from "./types.js";
+import { getProduct, getCartPrice } from "./logic";
 
-// Get All
-
-const products: TypeProductWithId[] = await getAllProducts();
-const carts: TypeCart[] = await getAllCarts();
-const users: TypeUser[] = await getAllUsers();
-
-// Console Logs
-
-// console.log(products);
-// console.log(JSON.stringify(carts[0], null, 2));
-// console.log(users);
-
-// Product By Id
-
-const productById: Result<TypeProductWithId> = getProductById(20, products);
-console.log(
-  productById.success === true ? productById.data : productById.error,
-);
-
-// Cart Price By Id
-
-const cartPriceById: Result<string> = getCartPriceById(5, carts, products);
-console.log(
-  cartPriceById.success === true ? cartPriceById.data : cartPriceById.error,
-);
+console.log(getProduct(1));
+console.log(getCartPrice(1));
