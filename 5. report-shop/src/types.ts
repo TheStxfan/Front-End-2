@@ -18,7 +18,7 @@ export type TypeCart = {
   id: number;
   userId: number;
   date: string;
-  products: TypeCartProduct;
+  products: TypeCartProduct[];
   __v: number;
 };
 

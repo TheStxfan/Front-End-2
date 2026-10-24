@@ -3,6 +3,7 @@ import {
   getAllCarts,
   getAllUsers,
   getProductById,
+  getCartPriceById,
 } from "./api_call.js";
 import type {
   Result,
@@ -26,7 +27,14 @@ const users: TypeUser[] = await getAllUsers();
 
 // Product By Id
 
-const productById: Result<TypeProductWithId> = getProductById(21, products);
+// const productById: Result<TypeProductWithId> = getProductById(20, products);
+// console.log(
+//   productById.success === true ? productById.data : productById.error,
+// );
+
+// Cart Price By Id
+
+const cartPriceById: Result<number> = getCartPriceById(10, carts, products);
 console.log(
-  productById.success === true ? productById.data : productById.error,
+  cartPriceById.success === true ? cartPriceById.data : cartPriceById.error,
 );
