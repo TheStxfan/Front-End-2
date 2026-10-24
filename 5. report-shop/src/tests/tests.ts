@@ -1,4 +1,4 @@
-import { getCartPriceById, getProductById } from "../api_call";
+import { getCartPriceById, getProductById } from "../logic";
 import type {
   Result,
   TypeCart,
