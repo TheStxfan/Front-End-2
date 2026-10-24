@@ -1,6 +1,6 @@
 import type { TypeProduct, TypeProductWithId } from "./models.js";
 
-export const getProducts = async (): Promise<TypeProduct[] | unknown> => {
+export const getProducts = async (): Promise<TypeProduct[]> => {
   try {
     const response = await fetch("https://fakestoreapi.com/products");
     if (!response.ok) {
