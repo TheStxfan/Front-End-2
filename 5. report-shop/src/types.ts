@@ -2,17 +2,14 @@ export type Result<T> =
   | { success: true; data: T }
   | { success: false; error: string };
 
-export type TypeProductWithoutId = {
+export type TypeProductWithId = {
+  id: number;
   title: string;
   price: number;
   description: string;
   category: string;
   image: string;
 };
-
-export type TypeProductWithId = {
-  id: number;
-} & TypeProductWithoutId;
 
 export type TypeCart = {
   id: number;

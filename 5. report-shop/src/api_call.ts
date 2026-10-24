@@ -1,11 +1,4 @@
-import type {
-  Result,
-  TypeCart,
-  TypeCartProduct,
-  TypeProductWithId,
-  TypeProductWithoutId,
-  TypeUser,
-} from "./types";
+import type { TypeCart, TypeProductWithId, TypeUser } from "./types";
 
 export const getAllProducts = async (): Promise<TypeProductWithId[]> => {
   try {
@@ -50,57 +43,4 @@ export const getAllUsers = async (): Promise<TypeUser[]> => {
       throw new Error(error.message);
     }
   }
-};
-
-export const getProductById = (
-  id: number,
-  catalogo: TypeProductWithId[],
-): Result<TypeProductWithId> => {
-  let prodotto: TypeProductWithId = catalogo[id - 1];
-  if (!prodotto) {
-    return {
-      success: false,
-      error: `Error: Cannot find product with id ${id}.`,
-    };
-  }
-  return {
-    success: true,
-    data: prodotto,
-  };
-};
-
-export const getCartPriceById = (
-  id: number,
-  carts: TypeCart[],
-  catalogo: TypeProductWithId[],
-): Result<string> => {
-  let totalCartPrice: number = 0;
-
-  const cart: TypeCart = carts[id - 1];
-  if (!cart) {
-    return {
-      success: false,
-      error: `Error: Cannot find cart with id ${id}.`,
-    };
-  }
-
-  for (const product of cart.products) {
-    const result: Result<TypeProductWithId> = getProductById(
-      product.productId,
-      catalogo,
-    );
-
-    if (result.success === true) {
-      const productPrice: number = result.data.price;
-      const quantity: number = product.quantity;
-      totalCartPrice += productPrice * quantity;
-    } else {
-      return { success: false, error: result.error };
-    }
-  }
-
-  return {
-    success: true,
-    data: `Carrello ${id} (utente ${cart.userId}): ${totalCartPrice} €`,
-  };
 };
