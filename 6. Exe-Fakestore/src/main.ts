@@ -13,3 +13,8 @@ import type { TypeCart, TypeProduct, TypeUser } from "./types";
 // console.log(JSON.stringify(users[0], null, 2));
 
 // --- CODE --- //
+
+const today = new Date();
+const monthAgo = new Date(today);
+monthAgo.setMonth(monthAgo.getMonth() - 1);
+console.log(today, monthAgo);
