@@ -1,4 +1,4 @@
-import { getCarts, getProducts, getUsers } from "./api_call";
+import { getAllTimeTopProducts, getLastMonthCarts } from "./logic";
 import type { TypeCart, TypeProduct, TypeUser } from "./types";
 
 // --- DEBUG: DISPLAY SINGLE ELEMENTS --- //
@@ -12,9 +12,19 @@ import type { TypeCart, TypeProduct, TypeUser } from "./types";
 // const users: TypeUser[] = await getUsers();
 // console.log(JSON.stringify(users[0], null, 2));
 
+// --- Date --- //
+
+// const today = new Date();
+// const monthAgo = new Date(today);
+// monthAgo.setMonth(monthAgo.getMonth() - 1);
+// console.log(today, monthAgo);
+
 // --- CODE --- //
 
-const today = new Date();
-const monthAgo = new Date(today);
-monthAgo.setMonth(monthAgo.getMonth() - 1);
-console.log(today, monthAgo);
+const allTimeTopProducts: TypeProduct[] = await getAllTimeTopProducts();
+
+console.log(allTimeTopProducts);
+
+const lastMonthCarts: TypeCart[] = await getLastMonthCarts();
+
+console.log(lastMonthCarts);
