@@ -5,17 +5,42 @@ export type TypeProduct = {
   description: string;
   category: string;
   image: string;
+  rating: {
+    rate: number;
+    count: number;
+  };
 };
 
 export type TypeCart = {
   id: number;
   userId: number;
-  products: TypeProduct[];
+  date: string;
+  products: {
+    productId: number;
+    quantity: number;
+  }[];
+  __v: number;
 };
 
 export type TypeUser = {
+  address: {
+    geolocation: {
+      lat: string;
+      long: string;
+    };
+    city: string;
+    street: string;
+    number: number;
+    zipcode: string;
+  };
   id: number;
-  username: string;
   email: string;
+  username: string;
   password: string;
+  name: {
+    firstname: string;
+    lastname: string;
+  };
+  phone: string;
+  __v: number;
 };
