@@ -17,19 +17,19 @@ export type TypeProduct = {
 };
 
 export type TypeProductRankingItem = {
-    ranking: number
-    productId: number
-    title: string
-    category: string
-    price: number
-    purchaseQty: number
-    revenue: number
-}
+  ranking: number;
+  productId: number;
+  title: string;
+  category: string;
+  price: number;
+  purchaseQty: number;
+  revenue: number;
+};
 
 export type TypeProductRanking = {
-    title: string
-    createdAt: string
-    dateLast: string
-    interval: string[]
-    products: 
-}
+  title: string;
+  createdAt: string;
+  dateLast: string;
+  interval: string[];
+  products: TypeProductRankingItem[];
+};
