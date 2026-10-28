@@ -1,4 +1,6 @@
+import { callApi } from "./api_call";
 import { getTopProductsQty } from "./logic";
+import type { TypeCart } from "./types";
 
 // --- DEBUG: DISPLAY SINGLE ELEMENTS --- //
 
@@ -27,9 +29,7 @@ import { getTopProductsQty } from "./logic";
 
 // --- CODE --- //
 
-// const lastMonthCarts: TypeCart[] = await getLastMonthCarts();
-
-// console.log(lastMonthCarts);
+// --- Report 1 --- //
 
 const productQty = getTopProductsQty();
 
@@ -38,3 +38,7 @@ console.log(productQty);
 const productQtyLastMonth = getTopProductsQty(true);
 
 console.log(productQtyLastMonth);
+
+// --- Report 2 --- //
+
+const result = await callApi<TypeCart[]>("https://fakestoreapi.com/users");

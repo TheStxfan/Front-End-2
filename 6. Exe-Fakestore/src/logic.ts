@@ -1,7 +1,5 @@
-import { getCarts } from "./api_call";
+import { apiCarts } from "./api_call";
 import type { TypeCart } from "./types";
-
-const carts = await getCarts();
 
 const getLastMonth = (lastCartDate: Date): Date => {
   const monthBefore = new Date(lastCartDate);
@@ -10,7 +8,7 @@ const getLastMonth = (lastCartDate: Date): Date => {
 };
 
 const getDateDescendingCarts = (): TypeCart[] => {
-  const orderedCarts: TypeCart[] = carts.sort(
+  const orderedCarts: TypeCart[] = apiCarts.sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   );
   return orderedCarts;
@@ -32,7 +30,7 @@ const createProductQtyMap = (): Map<number, number> => {
 
 const getProductQty = (lastMonth: boolean = false): Map<number, number> => {
   const productQty = createProductQtyMap();
-  const filteredCarts = lastMonth ? getLastMonthCarts() : carts;
+  const filteredCarts = lastMonth ? getLastMonthCarts() : apiCarts;
   for (let cart of filteredCarts) {
     for (let product of cart.products) {
       if (productQty.get(product.productId)) {

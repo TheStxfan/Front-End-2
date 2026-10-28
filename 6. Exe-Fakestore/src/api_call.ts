@@ -1,13 +1,13 @@
 import type { TypeProduct, TypeCart, TypeUser } from "./types";
 
-export const getProducts = async (): Promise<TypeProduct[]> => {
+export const callApi = async <T>(url: string): Promise<T> => {
   try {
-    const response = await fetch("https://fakestoreapi.com/products");
+    const response = await fetch(url);
     if (!response.ok) {
-      throw new Error("Error: Couldn't get Products.");
+      throw new Error("Error: Couldn't get Data.");
     }
-    const products: TypeProduct[] = await response.json();
-    return products;
+    const result: T = await response.json();
+    return result;
   } catch (e: unknown) {
     if (e instanceof Error) {
       throw new Error(e.message);
@@ -15,32 +15,12 @@ export const getProducts = async (): Promise<TypeProduct[]> => {
   }
 };
 
-export const getCarts = async (): Promise<TypeCart[]> => {
-  try {
-    const response = await fetch("https://fakestoreapi.com/carts");
-    if (!response.ok) {
-      throw new Error("Error: Couldn't get Carts.");
-    }
-    const carts: TypeCart[] = await response.json();
-    return carts;
-  } catch (e: unknown) {
-    if (e instanceof Error) {
-      throw new Error(e.message);
-    }
-  }
-};
-
-export const getUsers = async (): Promise<TypeUser[]> => {
-  try {
-    const response = await fetch("https://fakestoreapi.com/users");
-    if (!response.ok) {
-      throw new Error("Error: Couldn't get Users.");
-    }
-    const users: TypeUser[] = await response.json();
-    return users;
-  } catch (e: unknown) {
-    if (e instanceof Error) {
-      throw new Error(e.message);
-    }
-  }
-};
+export const apiProducts = await callApi<TypeProduct[]>(
+  "https://fakestoreapi.com/products",
+);
+export const apiCarts = await callApi<TypeCart[]>(
+  "https://fakestoreapi.com/carts",
+);
+export const apiUsers = await callApi<TypeUser[]>(
+  "https://fakestoreapi.com/users",
+);
