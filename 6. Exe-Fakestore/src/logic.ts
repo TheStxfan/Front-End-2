@@ -1,5 +1,7 @@
-import { getCarts, getProducts } from "./api_call";
-import type { TypeCart, TypeProduct } from "./types";
+import { getCarts } from "./api_call";
+import type { TypeCart } from "./types";
+
+const carts = await getCarts();
 
 const getLastMonth = (lastCartDate: Date): Date => {
   const monthBefore = new Date(lastCartDate);
@@ -7,33 +9,51 @@ const getLastMonth = (lastCartDate: Date): Date => {
   return monthBefore;
 };
 
-const getCountDescendingProducts = async (): Promise<TypeProduct[]> => {
-  const products: TypeProduct[] = await getProducts();
-  const ordered: TypeProduct[] = products.sort(
-    (a, b) => b.rating.count - a.rating.count,
-  );
-  return ordered;
-};
-
-const getDateDescendingCarts = async (): Promise<TypeCart[]> => {
-  const carts: TypeCart[] = await getCarts();
+const getDateDescendingCarts = (): TypeCart[] => {
   const orderedCarts: TypeCart[] = carts.sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   );
   return orderedCarts;
 };
 
-export const getAllTimeTopProducts = async (): Promise<TypeProduct[]> => {
-  const descendingProducts: TypeProduct[] = await getCountDescendingProducts();
-  let topThree: TypeProduct[] = descendingProducts.slice(0, 3);
-  return topThree;
-};
-
-export const getLastMonthCarts = async (): Promise<TypeCart[]> => {
-  const dateDescendingCarts: TypeCart[] = await getDateDescendingCarts();
+const getLastMonthCarts = (): TypeCart[] => {
+  const dateDescendingCarts: TypeCart[] = getDateDescendingCarts();
   const dateCarts: TypeCart[] = dateDescendingCarts.filter((cart) => {
     const cartDate = new Date(cart.date);
     return cartDate >= getLastMonth(new Date(dateDescendingCarts[0].date));
   });
   return dateCarts;
+};
+
+const createProductQtyMap = (): Map<number, number> => {
+  const productQty = new Map<number, number>();
+  return productQty;
+};
+
+const getProductQty = (lastMonth: boolean = false): Map<number, number> => {
+  const productQty = createProductQtyMap();
+  const filteredCarts = lastMonth ? getLastMonthCarts() : carts;
+  for (let cart of filteredCarts) {
+    for (let product of cart.products) {
+      if (productQty.get(product.productId)) {
+        productQty.set(
+          product.productId,
+          productQty.get(product.productId) + product.quantity,
+        );
+      } else {
+        productQty.set(product.productId, product.quantity);
+      }
+    }
+  }
+  return productQty;
+};
+
+export const getTopProductsQty = (
+  lastMonth: boolean = false,
+): Map<number, number> => {
+  const productQtyMap = lastMonth ? getProductQty(true) : getProductQty();
+  const topOrderedProducts = new Map(
+    [...productQtyMap.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3),
+  );
+  return topOrderedProducts;
 };
