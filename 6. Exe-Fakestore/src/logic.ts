@@ -8,7 +8,7 @@ const getLastMonth = (lastCartDate: Date): Date => {
 };
 
 const getDateDescendingCarts = (): TypeCart[] => {
-  const orderedCarts: TypeCart[] = apiCarts.sort(
+  const orderedCarts = apiCarts.sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   );
   return orderedCarts;
@@ -16,7 +16,7 @@ const getDateDescendingCarts = (): TypeCart[] => {
 
 const getLastMonthCarts = (): TypeCart[] => {
   const dateDescendingCarts: TypeCart[] = getDateDescendingCarts();
-  const dateCarts: TypeCart[] = dateDescendingCarts.filter((cart) => {
+  const dateCarts = dateDescendingCarts.filter((cart) => {
     const cartDate = new Date(cart.date);
     return cartDate >= getLastMonth(new Date(dateDescendingCarts[0].date));
   });
@@ -28,7 +28,7 @@ const createProductQtyMap = (): Map<number, number> => {
   return productQty;
 };
 
-const getProductQty = (lastMonth: boolean = false): Map<number, number> => {
+const getProductQty = (lastMonth = false): Map<number, number> => {
   const productQty = createProductQtyMap();
   const filteredCarts = lastMonth ? getLastMonthCarts() : apiCarts;
   for (let cart of filteredCarts) {
@@ -46,9 +46,7 @@ const getProductQty = (lastMonth: boolean = false): Map<number, number> => {
   return productQty;
 };
 
-export const getTopProductsQty = (
-  lastMonth: boolean = false,
-): Map<number, number> => {
+export const getTopProductsQty = (lastMonth = false): Map<number, number> => {
   const productQtyMap = lastMonth ? getProductQty(true) : getProductQty();
   const topOrderedProducts = new Map(
     [...productQtyMap.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3),
