@@ -1,6 +1,4 @@
-import { callApi } from "./api_call";
-import { getTopProductsQty } from "./logic";
-import type { TypeCart } from "./types";
+=import { getTopProductsQty } from "./logic";
 
 // --- DEBUG: DISPLAY SINGLE ELEMENTS --- //
 
@@ -40,5 +38,3 @@ const productQtyLastMonth = getTopProductsQty(true);
 console.log(productQtyLastMonth);
 
 // --- Report 2 --- //
-
-const result = await callApi<TypeCart[]>("https://fakestoreapi.com/users");
