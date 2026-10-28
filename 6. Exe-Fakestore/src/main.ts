@@ -1,6 +1,4 @@
-import { getCarts } from "./api_call";
 import { getTopProductsQty } from "./logic";
-import type { TypeCart } from "./types";
 
 // --- DEBUG: DISPLAY SINGLE ELEMENTS --- //
 
