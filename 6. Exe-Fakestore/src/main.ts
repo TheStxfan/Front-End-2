@@ -1,4 +1,5 @@
-=import { getTopProductsQty } from "./logic";
+import { callApi, getProducts } from "./api_call";
+import type { TypeCart, TypeProduct, TypeUser } from "./types";
 
 // --- DEBUG: DISPLAY SINGLE ELEMENTS --- //
 
@@ -29,12 +30,12 @@
 
 // --- Report 1 --- //
 
-const productQty = getTopProductsQty();
+// const productQty = getTopProductsQty();
 
-console.log(productQty);
+// console.log(productQty);
 
-const productQtyLastMonth = getTopProductsQty(true);
+// const productQtyLastMonth = getTopProductsQty(true);
 
-console.log(productQtyLastMonth);
+// console.log(productQtyLastMonth);
 
-// --- Report 2 --- //
+console.log(await getProducts(21));

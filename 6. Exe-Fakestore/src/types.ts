@@ -44,3 +44,21 @@ export type TypeUser = {
   phone: string;
   __v: number;
 };
+
+export type TypeProductReportItem = {
+  rank: number;
+  productId: number;
+  title: string;
+  category: string;
+  price: number;
+  purchaseQty: number;
+  revenue: number;
+};
+
+export type TypeProductReport = {
+  title: string;
+  createdOn: string;
+  lastDate: string;
+  interval: { startDate: Date; endDate: Date };
+  products: TypeProductReportItem[];
+};
