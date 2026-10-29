@@ -25,25 +25,35 @@ export const callApi = async <T>(url: string): Promise<T> => {
   }
 };
 
-export const getProducts = async (
+export function getProducts(): Promise<TypeProduct[]>;
+export function getProducts(id: number): Promise<TypeProduct>;
+export async function getProducts(
   id?: number,
-): Promise<TypeProduct[] | TypeProduct> => {
+): Promise<TypeProduct[] | TypeProduct> {
   const products = await callApi<TypeProduct | TypeProduct[]>(
     `https://fakestoreapi.com/products/${id !== undefined ? id : ""}`,
   );
   return products;
-};
+}
 
-export const getCarts = async (id?: number): Promise<TypeCart[] | TypeCart> => {
+export function getCarts(): Promise<TypeCart[]>;
+export function getCarts(id: number): Promise<TypeCart>;
+export async function getCarts(id?: number): Promise<TypeCart[] | TypeCart> {
   const products = await callApi<TypeCart | TypeCart[]>(
     `https://fakestoreapi.com/carts/${id !== undefined ? id : ""}`,
   );
   return products;
-};
+}
 
-export const getUsers = async (id?: number): Promise<TypeUser[] | TypeUser> => {
+export function getUsers(): Promise<TypeUser[]>;
+export function getUsers(id: number): Promise<TypeUser>;
+export async function getUsers(id?: number): Promise<TypeUser[] | TypeUser> {
   const products = await callApi<TypeUser | TypeUser[]>(
     `https://fakestoreapi.com/users/${id !== undefined ? id : ""}`,
   );
   return products;
-};
+}
+
+export const apiProducts: TypeProduct[] = await getProducts();
+export const apiCarts: TypeCart[] = await getCarts();
+export const apiUser: TypeUser[] = await getUsers();

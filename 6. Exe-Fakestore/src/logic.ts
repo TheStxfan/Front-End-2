@@ -1,5 +1,5 @@
 import { apiCarts } from "./api_call";
-import type { TypeCart, TypeProductRanking, TypeProductReport, TypeProductReportItem } from "./types";
+import type { TypeCart } from "./types";
 
 const getLastMonth = (lastCartDate: Date): Date => {
   const monthBefore = new Date(lastCartDate);
@@ -52,25 +52,4 @@ export const getTopProductsQty = (lastMonth = false): Map<number, number> => {
     [...productQtyMap.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3),
   );
   return topOrderedProducts;
-};
-
-export const getProductReportItem = (productId: number, rank: number, purchaseQty: number): TypeProductReportItem => {
-  let productItem: TypeProductReportItem
-
-  productItem.productId = getProduct()
-
-  
-
-  productItem.rank = rank
-
-}
-
-export const getReport = (
-  topOrderedProducts: Map<number, number>,
-  lastMonth = false,
-): TypeProductRanking => {
-  let finalReport: TypeProductReport
-  for (const [index, entry] of topOrderedProducts.entries()) {
-    const 
-  }
 };
