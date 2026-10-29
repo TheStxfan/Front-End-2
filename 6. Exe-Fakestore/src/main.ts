@@ -1,5 +1,4 @@
-import { callApi, getProducts } from "./api_call";
-import type { TypeCart, TypeProduct, TypeUser } from "./types";
+import { getProducts } from "./api_call";
 
 // --- DEBUG: DISPLAY SINGLE ELEMENTS --- //
 
